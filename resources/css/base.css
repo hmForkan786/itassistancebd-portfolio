@@ -1,0 +1,104 @@
+/**
+ * Global base styles.
+ *
+ * Tailwind's preflight already provides the reset (box-sizing, margin collapse,
+ * media defaults). This layer only adds project-wide typography, colour and
+ * accessibility defaults; component styling belongs to later modules.
+ */
+@layer base {
+    html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+        color-scheme: light;
+        scroll-padding-top: 5rem; /* keeps anchor targets clear of a future sticky header */
+    }
+
+    /* Smooth scrolling only when the visitor has not asked for reduced motion. */
+    @media (prefers-reduced-motion: no-preference) {
+        html {
+            scroll-behavior: smooth;
+        }
+    }
+
+    body {
+        background-color: var(--color-white);
+        color: var(--color-body);
+        font-family: var(--font-sans);
+        font-size: var(--text-body);
+        line-height: var(--text-body--line-height);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-display);
+        color: var(--color-heading);
+        font-weight: 700;
+        line-height: 1.15;
+        text-wrap: balance;
+    }
+
+    p {
+        text-wrap: pretty;
+    }
+
+    /* Link defaults: brand colour; body copy stays visibly underlined. */
+    a {
+        color: var(--color-primary);
+        text-underline-offset: 0.2em;
+        text-decoration-thickness: 1px;
+    }
+
+    a:hover {
+        color: var(--color-primary-dark);
+    }
+
+    :where(p, li, dd, blockquote) a {
+        text-decoration: underline;
+        text-decoration-color: color-mix(in oklab, var(--color-primary) 45%, transparent);
+    }
+
+    :where(p, li, dd, blockquote) a:hover {
+        text-decoration-color: currentColor;
+    }
+
+    /* Bengali script: dedicated font stack with extra line height for matras. */
+    :lang(bn),
+    [lang='bn'] {
+        font-family: var(--font-bengali);
+        line-height: 1.85;
+    }
+
+    ::selection {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+    }
+
+    /* Visible keyboard focus everywhere, without affecting mouse interaction. */
+    :where(:focus-visible) {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+    }
+
+    hr {
+        border-color: var(--color-line);
+    }
+
+    /* Respect reduced-motion for anything that animates in later modules. */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+}

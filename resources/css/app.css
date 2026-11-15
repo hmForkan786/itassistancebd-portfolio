@@ -1,0 +1,29 @@
+/**
+ * IT Assistance BD Portfolio — stylesheet entry point.
+ *
+ * Tailwind CSS v4 is configured CSS-first: there is no tailwind.config.js.
+ * All design tokens live in `theme.css` (@theme), global element styling in
+ * `base.css`, and reusable utilities in `utilities.css`.
+ */
+@import 'tailwindcss' source(none);
+
+/* Self-hosted variable fonts, bundled by Vite (no third-party requests, no blocking loads). */
+@import '@fontsource-variable/inter/index.css';
+@import '@fontsource-variable/plus-jakarta-sans/index.css';
+@import '@fontsource-variable/noto-sans-bengali/index.css';
+
+/* Design system layers. */
+@import './theme.css';
+@import './base.css';
+@import './utilities.css';
+
+/**
+ * Explicit content sources (automatic detection is disabled via `source(none)`
+ * so build output stays predictable). Compiled Blade caches and the archived
+ * Laravel welcome view are deliberately not scanned — they carry their own
+ * inlined demo stylesheets and would leak their palette into the project CSS.
+ */
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../views/**/*.blade.php';
+@source '../js/**/*.{js,ts,vue}';
+@source not '../views/welcome.blade.php';

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /dev/
+Disallow: /up
+
+# Sitemap is served at /sitemap.xml (domain is derived from APP_URL in production).
+# Add an absolute Sitemap directive here once the production domain is confirmed, e.g.:
+# Sitemap: https://<production-domain>/sitemap.xml

@@ -1,0 +1,148 @@
+/**
+ * Design tokens — Tailwind CSS v4 `@theme` namespace.
+ *
+ * `static` keeps every token in the compiled `:root` block so the design system
+ * is available to CSS, Vue and plain HTML even before a utility is first used.
+ *
+ * Naming rules:
+ *   --color-*     → bg-primary, text-heading, border-line, ...
+ *   --font-*      → font-sans, font-display, font-bengali
+ *   --text-*      → text-h1, text-lead, ...
+ *   --spacing-*   → p-card, gap-grid, py-section, ...
+ *   --container-* → max-w-page, ...
+ *   --radius-*    → rounded-card, ...
+ *   --shadow-*    → shadow-card, ...
+ */
+@theme static {
+    /* ---------------------------------------------------------------------
+     * Brand palette (approved — do not change without Project Owner approval)
+     * ------------------------------------------------------------------ */
+    --color-primary: #059669;
+    --color-primary-dark: #047857;
+    --color-primary-light: #10b981;
+    --color-accent: #34d399;
+
+    /* Text */
+    --color-heading: #0f172a;
+    --color-body: #475569;
+    --color-muted: #64748b;
+
+    /* Backgrounds */
+    --color-surface: #f8fafc;
+    --color-surface-soft: #f1f5f9;
+
+    /* Borders */
+    --color-line: #e2e8f0;
+    --color-line-strong: #cbd5e1;
+
+    /* Footer */
+    --color-footer: #111827;
+    --color-footer-text: #f9fafb;
+    --color-footer-muted: #9ca3af;
+
+    /* ---------------------------------------------------------------------
+     * Semantic UI states (feedback colours — these extend, never replace,
+     * the approved brand palette; they are only for status/validation)
+     * ------------------------------------------------------------------ */
+    --color-success: #047857;
+    --color-success-soft: #ecfdf5;
+    --color-success-line: #a7f3d0;
+
+    --color-warning: #b45309;
+    --color-warning-soft: #fffbeb;
+    --color-warning-line: #fde68a;
+
+    --color-danger: #b91c1c;
+    --color-danger-dark: #991b1b;
+    --color-danger-soft: #fef2f2;
+    --color-danger-line: #fecaca;
+
+    --color-neutral: #475569;
+    --color-neutral-soft: #f1f5f9;
+    --color-neutral-line: #e2e8f0;
+
+    /* ---------------------------------------------------------------------
+     * Typography
+     * Inter = UI/body, Plus Jakarta Sans = display headings,
+     * Noto Sans Bengali = Bengali script (self-hosted, font-display: swap).
+     * ------------------------------------------------------------------ */
+    --font-sans: 'Inter Variable', 'Inter', 'Noto Sans Bengali Variable', 'Noto Sans Bengali', 'Nirmala UI',
+        ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', 'Inter Variable', 'Inter',
+        'Noto Sans Bengali Variable', 'Noto Sans Bengali', 'Nirmala UI', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji';
+    --font-bengali: 'Noto Sans Bengali Variable', 'Noto Sans Bengali', 'Nirmala UI', Vrinda, 'Bangla Sangam MN',
+        'Noto Sans', sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono',
+        'Courier New', monospace;
+
+    /* Fluid type scale (min at mobile, max at large desktop) */
+    --text-display: clamp(2.5rem, 1.85rem + 2.8vw, 4rem);
+    --text-display--line-height: 1.06;
+    --text-display--letter-spacing: -0.025em;
+
+    --text-h1: clamp(2rem, 1.55rem + 1.9vw, 3rem);
+    --text-h1--line-height: 1.1;
+    --text-h1--letter-spacing: -0.02em;
+
+    --text-h2: clamp(1.625rem, 1.35rem + 1.1vw, 2.25rem);
+    --text-h2--line-height: 1.15;
+    --text-h2--letter-spacing: -0.015em;
+
+    --text-h3: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+    --text-h3--line-height: 1.25;
+    --text-h3--letter-spacing: -0.01em;
+
+    --text-h4: clamp(1.15rem, 1.08rem + 0.35vw, 1.375rem);
+    --text-h4--line-height: 1.35;
+
+    --text-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+    --text-lead--line-height: 1.65;
+
+    --text-body: 1rem;
+    --text-body--line-height: 1.7;
+
+    --text-small: 0.875rem;
+    --text-small--line-height: 1.6;
+
+    /* Bengali body copy: slightly smaller size, generous line height for matras. */
+    --text-bn: 0.9375rem;
+    --text-bn--line-height: 1.85;
+
+    --text-tiny: 0.75rem;
+    --text-tiny--line-height: 1.5;
+
+    /* ---------------------------------------------------------------------
+     * Spacing — 4px base grid (--spacing stays 0.25rem) plus semantic,
+     * fluid tokens so sections/cards never need arbitrary values.
+     * ------------------------------------------------------------------ */
+    --spacing-gutter: clamp(1rem, 0.7rem + 1.5vw, 2.5rem);
+    --spacing-section: clamp(3rem, 2.25rem + 3vw, 6rem);
+    --spacing-section-sm: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+    --spacing-card: clamp(1.25rem, 1rem + 0.75vw, 1.75rem);
+    --spacing-grid: clamp(1rem, 0.8rem + 0.9vw, 1.75rem);
+    --spacing-stack: 1rem;
+    --spacing-stack-lg: 1.5rem;
+
+    /* ---------------------------------------------------------------------
+     * Container system
+     * ------------------------------------------------------------------ */
+    --container-narrow: 48rem; /* 768px  — long-form reading */
+    --container-page: 80rem; /* 1280px — default content shell */
+    --container-wide: 90rem; /* 1440px — full-bleed feature bands */
+
+    /* ---------------------------------------------------------------------
+     * Radius
+     * ------------------------------------------------------------------ */
+    --radius-field: 0.5rem;
+    --radius-card: 0.75rem;
+    --radius-pill: 9999px;
+
+    /* ---------------------------------------------------------------------
+     * Shadows (soft, low-contrast elevation using the heading ink tone)
+     * ------------------------------------------------------------------ */
+    --shadow-card: 0 1px 2px rgb(15 23 42 / 0.06), 0 8px 24px -12px rgb(15 23 42 / 0.18);
+    --shadow-card-hover: 0 2px 4px rgb(15 23 42 / 0.08), 0 16px 32px -16px rgb(15 23 42 / 0.24);
+    --shadow-elevated: 0 24px 48px -24px rgb(15 23 42 / 0.3);
+}
