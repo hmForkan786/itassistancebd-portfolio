@@ -9,7 +9,24 @@
 import { BaseContainer, SectionHeading } from '@/components/ui';
 import CtaLink from '@/components/portfolio/CtaLink.vue';
 import ServiceCard from '@/components/portfolio/ServiceCard.vue';
-import { services } from '@/data/services';
+import { onMounted, ref } from 'vue';
+import { services as staticServices } from '@/data/services';
+import http from '@/services/http';
+import type { Service } from '@/data/services';
+
+const services = ref<Service[]>([...staticServices]);
+
+onMounted(async () => {
+    try {
+        const res = await http.get('/public/services');
+        const api = res.data ?? [];
+        if (Array.isArray(api) && api.length > 0) {
+            services.value = api.map((s: any) => ({ title: s.title, description: s.description ?? '' }));
+        }
+    } catch {
+        // keep static fallback
+    }
+});
 </script>
 
 <template>

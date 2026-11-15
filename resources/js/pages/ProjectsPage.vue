@@ -7,10 +7,26 @@
  * commercial product. No demo URLs, repositories, screenshots or client details
  * are invented.
  */
+import { onMounted, ref } from 'vue';
 import { BaseBadge, BaseContainer, SectionHeading } from '@/components/ui';
 import CtaLink from '@/components/portfolio/CtaLink.vue';
 import ProjectCard from '@/components/portfolio/ProjectCard.vue';
-import { projects } from '@/data/projects';
+import { projects as staticProjects } from '@/data/projects';
+import { fetchProjects } from '@/data/projectsApi';
+import type { PortfolioProject } from '@/data/projects';
+
+const projects = ref<PortfolioProject[]>([...staticProjects]);
+
+onMounted(async () => {
+    try {
+        const apiProjects = await fetchProjects();
+        if (apiProjects.length > 0) {
+            projects.value = apiProjects;
+        }
+    } catch {
+        // keep static fallback
+    }
+});
 
 /** Legend labels — always shown as text alongside badge colour. */
 const projectStatuses: readonly string[] = ['Completed', 'In Progress', 'Prototype', 'Planned'];

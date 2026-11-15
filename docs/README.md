@@ -171,3 +171,6 @@ Detailed reports are preserved as evidence. Use [MODULE_REGISTRY.md](MODULE_REGI
 - **Source of truth:** [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) (current state) and [MODULE_REGISTRY.md](MODULE_REGISTRY.md) (modules/evidence). Historical reports provide detailed evidence and are not replaced by summaries.
 - **No secrets:** Documentation must not contain passwords, API keys, tokens, or private credentials.
 - **Approval gates:** Proposed/roadmap items are not approved implementation tasks unless explicitly approved by the Project Owner.
+
+## Phase 2 (Admin CMS + Client Trust + Analytics)
+See docs/phase2/ for implementation plan, report, admin CMS docs, client trust, analytics, schema, API, setup, content guide, security review.

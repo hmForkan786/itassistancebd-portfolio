@@ -21,6 +21,30 @@ const homeDescription =
 
 const routes: RouteRecordRaw[] = [
     {
+        path: '/admin/login',
+        name: 'admin.login',
+        component: () => import('@/pages/admin/AdminLoginPage.vue'),
+        meta: { title: 'Admin login — IT Assistance BD', description: 'Admin sign in.' },
+    },
+    {
+        path: '/admin',
+        component: () => import('@/layouts/AdminLayout.vue'),
+        meta: { requiresAdmin: true },
+        children: [
+            { path: '', name: 'admin.dashboard', component: () => import('@/pages/admin/AdminDashboardPage.vue') },
+            { path: 'projects', name: 'admin.projects', component: () => import('@/pages/admin/AdminProjectsPage.vue') },
+            { path: 'projects/:id/edit', name: 'admin.project.edit', component: () => import('@/pages/admin/AdminProjectEditPage.vue') },
+            { path: 'projects/new', name: 'admin.project.new', component: () => import('@/pages/admin/AdminProjectEditPage.vue') },
+            { path: 'testimonials', name: 'admin.testimonials', component: () => import('@/pages/admin/AdminTestimonialsPage.vue') },
+            { path: 'metrics', name: 'admin.metrics', component: () => import('@/pages/admin/AdminMetricsPage.vue') },
+            { path: 'services', name: 'admin.services', component: () => import('@/pages/admin/AdminServicesPage.vue') },
+            { path: 'skills', name: 'admin.skills', component: () => import('@/pages/admin/AdminSkillsPage.vue') },
+            { path: 'messages', name: 'admin.messages', component: () => import('@/pages/admin/AdminMessagesPage.vue') },
+            { path: 'settings', name: 'admin.settings', component: () => import('@/pages/admin/AdminSettingsPage.vue') },
+            { path: 'analytics', name: 'admin.analytics', component: () => import('@/pages/admin/AdminAnalyticsPage.vue') },
+        ],
+    },
+    {
         path: '/',
         component: () => import('@/layouts/PortfolioLayout.vue'),
         children: [
@@ -207,6 +231,56 @@ router.afterEach((to) => {
     setMetaName('twitter:card', 'summary');
     setMetaName('twitter:title', title);
     setMetaName('twitter:description', description);
+
+    // Lightweight first-party analytics (fire-and-forget; never block navigation).
+    if (!to.path.startsWith('/admin')) {
+        const eventName = to.name === 'app.projects.detail' ? 'project_view' : 'page_view';
+        const payload: Record<string, unknown> = {
+            event_name: eventName,
+            page_path: to.path,
+            device_type: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+        };
+        if (to.name === 'app.projects.detail' && typeof to.params.slug === 'string') {
+            // Resolve project id not available client-side; send slug via page_path only.
+        }
+        try {
+            fetch('/api/public/analytics/event', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                credentials: 'same-origin',
+                body: JSON.stringify(payload),
+                keepalive: true,
+            }).catch(() => {});
+        } catch {
+            // ignore
+        }
+    }
+});
+
+// Admin route guard.
+router.beforeEach(async (to) => {
+    if (to.meta.requiresAdmin) {
+        // Lazy import to avoid circular deps.
+        const { useAdminAuthStore } = await import('@/stores/adminAuth');
+        const auth = useAdminAuthStore();
+        if (!auth.user) {
+            const ok = await auth.fetchMe();
+            if (!ok) {
+                return { name: 'admin.login', query: { redirect: to.fullPath } };
+            }
+        }
+    }
+    if (to.name === 'admin.login') {
+        const { useAdminAuthStore } = await import('@/stores/adminAuth');
+        const auth = useAdminAuthStore();
+        if (!auth.user) {
+            await auth.fetchMe();
+        }
+        if (auth.user) {
+            return { name: 'admin.dashboard' };
+        }
+    }
+    return true;
 });
 
 export default router;

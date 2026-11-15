@@ -24,8 +24,41 @@ import WorkProcess from '@/components/portfolio/WorkProcess.vue';
 import { useScrollReveal } from '@/composables/useScrollReveal';
 import { aboutPoints, focusAreas, site } from '@/data/site';
 import { projects } from '@/data/projects';
-import { services } from '@/data/services';
-import { skillGroups } from '@/data/skills';
+import { onMounted, ref } from 'vue';
+import { services as staticServices } from '@/data/services';
+import { skillGroups as staticSkillGroups } from '@/data/skills';
+import http from '@/services/http';
+import type { Service } from '@/data/services';
+import type { SkillGroup } from '@/data/skills';
+
+const services = ref<Service[]>([...staticServices]);
+const skillGroups = ref<SkillGroup[]>([...staticSkillGroups]);
+
+onMounted(async () => {
+    try {
+        const svcRes = await http.get('/public/services');
+        const apiServices = svcRes.data ?? [];
+        if (Array.isArray(apiServices) && apiServices.length > 0) {
+            services.value = apiServices.map((s: any) => ({ title: s.title, description: s.description ?? '' }));
+        }
+    } catch {
+        // keep static fallback
+    }
+    try {
+        const skillRes = await http.get('/public/skills');
+        const grouped = skillRes.data ?? {};
+        const apiGroups: SkillGroup[] = Object.keys(grouped).map((cat) => ({
+            title: cat,
+            description: '',
+            items: (grouped[cat] as any[]).map((s) => s.name),
+        }));
+        if (apiGroups.length > 0) {
+            skillGroups.value = apiGroups;
+        }
+    } catch {
+        // keep static fallback
+    }
+});
 import { technologiesUsedCount } from '@/data/stats';
 
 useScrollReveal();

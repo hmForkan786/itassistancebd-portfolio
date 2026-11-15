@@ -6,12 +6,14 @@
  * not-found state (so direct URLs load without a broken route) with a way back
  * to the projects list.
  */
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { BaseCard, BaseContainer, SectionHeading } from '@/components/ui';
 import CtaLink from '@/components/portfolio/CtaLink.vue';
 import ProjectDetail from '@/components/portfolio/ProjectDetail.vue';
 import { getProjectBySlug } from '@/data/projects';
+import { fetchProjectBySlug } from '@/data/projectsApi';
+import type { PortfolioProject } from '@/data/projects';
 
 const route = useRoute();
 
@@ -20,7 +22,14 @@ const slug = computed<string>(() => {
     return typeof param === 'string' ? param : '';
 });
 
-const project = computed(() => getProjectBySlug(slug.value));
+const project = ref<PortfolioProject | null>(getProjectBySlug(slug.value) ?? null);
+
+onMounted(async () => {
+    const apiProject = await fetchProjectBySlug(slug.value);
+    if (apiProject) {
+        project.value = apiProject;
+    }
+});
 </script>
 
 <template>

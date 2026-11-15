@@ -1,48 +1,3 @@
-<script setup lang="ts">
-/**
- * ContactForm — client-side form that opens the visitor's email client.
- *
- * There is no backend contact endpoint, so submission builds a mailto: link
- * with the entered subject and message. Validation is client-side only; no
- * message is sent or stored by this website. This keeps the form honest.
- */
-import { computed, ref } from 'vue';
-import { BaseButton, BaseContainer, BaseInput, BaseTextarea, SectionHeading } from '@/components/ui';
-import { site } from '@/data/site';
-
-const name = ref('');
-const email = ref('');
-const message = ref('');
-const submitted = ref(false);
-const error = ref('');
-
-const isValid = computed<boolean>(() => name.value.trim().length > 0 && message.value.trim().length > 0);
-
-const mailtoHref = computed<string>(() => {
-    const subject = encodeURIComponent(`Portfolio enquiry — ${site.name}`);
-    const body = encodeURIComponent(`Name: ${name.value}\nEmail: ${email.value}\n\n${message.value}`);
-    return `mailto:${site.email}?subject=${subject}&body=${body}`;
-});
-
-const handleSubmit = (): void => {
-    error.value = '';
-    if (!isValid.value) {
-        error.value = 'Please enter your name and a short message.';
-        return;
-    }
-    submitted.value = true;
-    window.location.href = mailtoHref.value;
-};
-
-const reset = (): void => {
-    name.value = '';
-    email.value = '';
-    message.value = '';
-    submitted.value = false;
-    error.value = '';
-};
-</script>
-
 <template>
     <section id="contact-form" class="section bg-surface" aria-labelledby="contact-form-title">
         <BaseContainer class="stack-lg max-w-2xl">
@@ -51,26 +6,85 @@ const reset = (): void => {
                 as="h2"
                 eyebrow="Contact"
                 title="Send a message"
-                description="Fill in the form and your email application will open with the message pre-filled. No message is sent or stored by this website."
+                description="Messages are delivered to IT Assistance BD and stored securely. No fabricated confirmations."
                 align="center"
             />
 
             <form class="stack" @submit.prevent="handleSubmit">
                 <BaseInput v-model="name" label="Your name" name="name" autocomplete="name" required />
-                <BaseInput v-model="email" label="Email (optional)" name="email" type="email" autocomplete="email" />
+                <BaseInput v-model="email" label="Email" name="email" type="email" autocomplete="email" required />
+                <BaseInput v-model="phone" label="Phone (optional)" name="phone" />
+                <BaseInput v-model="subject" label="Subject (optional)" name="subject" />
                 <BaseTextarea v-model="message" label="Message" name="message" :rows="5" required />
+                <!-- honeypot -->
+                <input v-model="website" type="text" name="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
 
                 <p v-if="error" class="text-small text-danger" role="alert">{{ error }}</p>
-                <p v-if="submitted" class="text-small text-success">
-                    Your email application should have opened. If not, email
-                    <a :href="`mailto:${site.email}`" class="font-medium">{{ site.email }}</a> directly.
-                </p>
+                <p v-if="success" class="text-small text-success">{{ success }}</p>
 
                 <div class="flex flex-wrap gap-3">
-                    <BaseButton type="submit" variant="primary" size="lg">Open email</BaseButton>
+                    <BaseButton type="submit" variant="primary" size="lg" :disabled="submitting">
+                        {{ submitting ? 'Sending...' : 'Send message' }}
+                    </BaseButton>
                     <BaseButton type="button" variant="ghost" size="lg" @click="reset">Reset</BaseButton>
                 </div>
             </form>
         </BaseContainer>
     </section>
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+import { BaseButton, BaseContainer, BaseInput, BaseTextarea, SectionHeading } from '@/components/ui';
+import http from '@/services/http';
+
+const name = ref('');
+const email = ref('');
+const phone = ref('');
+const subject = ref('');
+const message = ref('');
+const website = ref(''); // honeypot
+const submitting = ref(false);
+const error = ref('');
+const success = ref('');
+
+async function handleSubmit(): Promise<void> {
+    error.value = '';
+    success.value = '';
+    if (!name.value.trim() || !message.value.trim() || !email.value.trim()) {
+        error.value = 'Please enter your name, email and a short message.';
+        return;
+    }
+    submitting.value = true;
+    try {
+        await http.post('/public/contact', {
+            name: name.value,
+            email: email.value,
+            phone: phone.value || undefined,
+            subject: subject.value || undefined,
+            message: message.value,
+            source_page: window.location.pathname,
+        });
+        success.value = 'Message received. Thank you.';
+        name.value = '';
+        email.value = '';
+        phone.value = '';
+        subject.value = '';
+        message.value = '';
+    } catch (e: any) {
+        error.value = e?.response?.data?.message ?? 'Failed to send message. Please try again or email directly.';
+    } finally {
+        submitting.value = false;
+    }
+}
+
+function reset(): void {
+    name.value = '';
+    email.value = '';
+    phone.value = '';
+    subject.value = '';
+    message.value = '';
+    error.value = '';
+    success.value = '';
+}
+</script>
