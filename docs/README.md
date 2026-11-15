@@ -1,7 +1,7 @@
 # Documentation Index — IT Assistance BD Portfolio
 
 **Project root:** `C:\xampp\htdocs\Laravel\Portfolio`  
-**Last updated:** 2026-11-15 (Installation 11 documentation)  
+**Last updated:** 2026-11-15 (GitHub backup preparation)  
 **Purpose:** Central navigation for project documentation. Use this index to find the current state, rules, evidence, and focused reference docs without reading every historical report.
 
 > **Reading order for coding agents:** see [../AGENTS.md](../AGENTS.md) and [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md). Do not read every historical installation report during ordinary implementation.
@@ -27,6 +27,104 @@
 | [DEPLOYMENT.md](DEPLOYMENT.md) | cPanel/shared-hosting deployment plan (prerequisites, build, SPA routing, config checklist, rollback, owner decisions) — **not deployed** |
 | [CHANGELOG.md](CHANGELOG.md) | Chronological summary of approved module changes |
 | [OPEN_ISSUES.md](OPEN_ISSUES.md) | Outstanding issues, known limitations, owner actions, deferred/pending verification items with status/links |
+
+---
+
+## Categorized documentation (navigation)
+
+### Project overview
+- [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) — purpose, audience, brand, goals, scope, constraints, owner responsibilities
+- [../PROJECT_MASTER_RULES.md](../PROJECT_MASTER_RULES.md) — permanent project rules
+- [../AGENTS.md](../AGENTS.md) — coding-agent instructions
+
+### Architecture
+- [ARCHITECTURE.md](ARCHITECTURE.md) — current verified architecture (Laravel, Vue/TS/Vite/Tailwind, routing/layout/data/build/SPA fallback, limitations)
+- [architecture/SYSTEM_ARCHITECTURE.md](architecture/SYSTEM_ARCHITECTURE.md) — system/backend/frontend/SPA/API/auth/data flow/build/runtime/boundaries
+
+### Requirements
+- [requirements/REQUIREMENTS.md](requirements/REQUIREMENTS.md) — functional, technical, non-functional requirements and out-of-scope
+
+### Decisions
+- [DECISIONS.md](DECISIONS.md) — verified/owner-approved decision log (D-001–D-015)
+- [decisions/](decisions/) — decision register directory (see `OWNER_DECISION_APPROVAL_REGISTER.md`)
+
+### Backend
+- [backend/BACKEND_DOCUMENTATION.md](backend/BACKEND_DOCUMENTATION.md) — Laravel structure, controllers, models, services, middleware, providers, auth, validation, error handling, conventions
+
+### Frontend
+- [frontend/FRONTEND_DOCUMENTATION.md](frontend/FRONTEND_DOCUMENTATION.md) — Vue app structure, routing, components, layouts, state, Pinia, Axios, TypeScript, Tailwind, Vite
+
+### API
+- [api/API_DOCUMENTATION.md](api/API_DOCUMENTATION.md) — API status (none implemented), HTTP client, Laravel routes, future API work
+
+### Database
+- [database/DATABASE_DOCUMENTATION.md](database/DATABASE_DOCUMENTATION.md) — current SQLite scaffold, tables, migrations, production strategy
+
+### Installation
+- [ENVIRONMENT_SETUP.md](ENVIRONMENT_SETUP.md) — verified environment, setup, commands, safe operating instructions
+- [installation/LOCAL_INSTALLATION.md](installation/LOCAL_INSTALLATION.md) — local installation steps
+- [INSTALLATION_REPORT.md](INSTALLATION_REPORT.md) — Module 01 environment report
+- [LARAVEL_INSTALLATION.md](LARAVEL_INSTALLATION.md) — Module 02
+- [VUE_INSTALLATION.md](VUE_INSTALLATION.md) — Module 03
+
+### Development
+- [development/DEVELOPMENT.md](development/DEVELOPMENT.md) — development workflow, commands, notes
+- [CONTRIBUTING.md](../CONTRIBUTING.md) (root) — coding standards, Git workflow, testing expectations
+- [SECURITY.md](../SECURITY.md) (root) — security policy
+
+### Testing
+- [testing/TESTING_GUIDE.md](testing/TESTING_GUIDE.md) — test framework, commands, environment, limitations
+- [testing/QUALITY_STATUS.md](testing/QUALITY_STATUS.md) — actual quality results
+- [QA_STRATEGY.md](QA_STRATEGY.md) — QA strategy and evidence requirements
+
+### Security
+- [security/SECURITY.md](security/SECURITY.md) — security summary and policy reference
+- [../SECURITY.md](../SECURITY.md) (root) — full security policy
+
+### Deployment
+- [DEPLOYMENT.md](DEPLOYMENT.md) — cPanel/shared-hosting deployment plan
+- [deployment/CPANEL_DEPLOYMENT.md](deployment/CPANEL_DEPLOYMENT.md) — cPanel deployment summary
+- [deployment/DEPLOYMENT_STATUS.md](deployment/DEPLOYMENT_STATUS.md) — deployment status (not deployed)
+- [CPANEL_DEPLOYMENT_AUDIT_REPORT.md](CPANEL_DEPLOYMENT_AUDIT_REPORT.md) — hosting compatibility audit
+- [DEPLOYMENT_PLANNING.md](DEPLOYMENT_PLANNING.md) — deployment planning
+- [CPANEL_PRODUCTION_DEPLOYMENT_GUIDE.md](CPANEL_PRODUCTION_DEPLOYMENT_GUIDE.md) — owner deployment guide
+- [PRODUCTION_UPLOAD_CHECKLIST.md](PRODUCTION_UPLOAD_CHECKLIST.md) — upload checklist
+- [PRODUCTION_RELEASE_EXECUTION_PLAN.md](PRODUCTION_RELEASE_EXECUTION_PLAN.md) — release execution plan
+- [PRODUCTION_SMOKE_TEST_CHECKLIST.md](PRODUCTION_SMOKE_TEST_CHECKLIST.md) — smoke tests
+- [OWNER_RELEASE_AUTHORIZATION.md](OWNER_RELEASE_AUTHORIZATION.md) — release authorization sheet
+
+### Phases
+- [phases/PHASE_INDEX.md](phases/PHASE_INDEX.md) — phase/module index (01–22)
+- [reports/PROJECT_IMPLEMENTATION_STATUS.md](reports/PROJECT_IMPLEMENTATION_STATUS.md) — implementation status summary
+- [MODULE_REGISTRY.md](MODULE_REGISTRY.md) — module register (01–22)
+
+### Reports
+- [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) — single source of truth for current state
+- [PORTFOLIO_QA_REPORT.md](PORTFOLIO_QA_REPORT.md) — Module 10 QA report
+- [SEO_PERFORMANCE_REPORT.md](SEO_PERFORMANCE_REPORT.md) — Module 12 SEO/perf report
+- [PERFORMANCE_AUDIT_REPORT.md](PERFORMANCE_AUDIT_REPORT.md) — Module 13 perf audit
+- [RELEASE_READINESS_REPORT.md](RELEASE_READINESS_REPORT.md) — Module 17 release readiness
+- [PRODUCTION_RELEASE_GO_NO_GO.md](PRODUCTION_RELEASE_GO_NO_GO.md) — Go/No-Go matrix
+- [OWNER_CONTENT_REVIEW.md](OWNER_CONTENT_REVIEW.md) — owner content review
+- [OWNER_DECISION_APPROVAL_REGISTER.md](OWNER_DECISION_APPROVAL_REGISTER.md) — owner decision approval register
+
+### Roadmap
+- [ROADMAP.md](ROADMAP.md) — future work (approved/proposed/pending/deferred)
+- [roadmap/PROJECT_ROADMAP.md](roadmap/PROJECT_ROADMAP.md) — roadmap summary
+
+### Troubleshooting
+- [troubleshooting/TROUBLESHOOTING.md](troubleshooting/TROUBLESHOOTING.md) — common issues and fixes
+
+### GitHub backup
+- [github/GITHUB_PROJECT_INVENTORY.md](github/GITHUB_PROJECT_INVENTORY.md) — project inventory
+- [github/GITHUB_BACKUP_FINAL_REPORT.md](github/GITHUB_BACKUP_FINAL_REPORT.md) — backup final report (created at push)
+- [GITHUB_BACKUP_GUIDE.md](GITHUB_BACKUP_GUIDE.md) — GitHub backup guide
+
+### Reference
+- [reference/REFERENCE.md](reference/REFERENCE.md) — central reference links
+- [requirements/REQUIREMENTS.md](requirements/REQUIREMENTS.md) — requirements
+- [development/DEVELOPMENT.md](development/DEVELOPMENT.md) — development workflow
+- [CONTENT_INVENTORY.md](CONTENT_INVENTORY.md) — content inventory
 
 ---
 

@@ -1,66 +1,125 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# IT Assistance BD Portfolio
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel 12 + Vue 3 + TypeScript + Vite + Tailwind CSS 4 portfolio website for IT Assistance BD.
 
-## About Laravel
+## Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This project is a factual, static, file-based portfolio presenting services, skills, and project initiatives of IT Assistance BD. It is built incrementally through owner-approved modules. Content is conservative and honest (no fabricated metrics, clients, testimonials, screenshots, demo links, or repositories).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Technology stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Backend:** Laravel 12.72.0 (PHP 8.4.x, Composer 2.11.x)
+- **Frontend:** Vue 3.5.45, TypeScript 6.0.3, Vite 6.4.6, Vue Router 4.6.5, Pinia 4.1.0, Axios 1.21.1
+- **Styling:** Tailwind CSS 4.3.5 (CSS-first, `@theme static`, no config file)
+- **Fonts:** Inter Variable, Plus Jakarta Sans Variable, Noto Sans Bengali Variable (self-hosted)
 
-## Learning Laravel
+## Requirements
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP ≥ 8.2 (verified 8.4.24), Composer 2.x
+- Node.js LTS + npm (verified 24.19.0 / 11.17.0)
+- XAMPP (Apache + MariaDB) optional for local dev
+- Required PHP extensions: bcmath, ctype, curl, dom, fileinfo, filter, hash, mbstring, openssl, pcre, PDO, pdo_mysql, session, tokenizer, xml, zip
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Installation
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+See `docs/installation/LOCAL_INSTALLATION.md` and `docs/ENVIRONMENT_SETUP.md`.
 
-## Laravel Sponsors
+Quick start:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+composer install
+npm install
+cp .env.example .env   # then set APP_NAME, APP_KEY (php artisan key:generate), APP_URL
+php artisan key:generate
+npm run build
+php artisan serve
+```
 
-### Premium Partners
+## Local development
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```bash
+npm run dev          # Vite dev server (HMR)
+npm run build        # production build
+npm run type-check   # vue-tsc --noEmit
+php artisan serve    # Laravel dev server
+php artisan test     # Laravel tests
+```
 
-## Contributing
+## Environment configuration
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- `.env` is local-only (gitignored). Use `.env.example` as template. Never commit secrets.
+- Current app binding uses scaffold SQLite. MariaDB switch is pending owner approval.
+- Production domain is unconfirmed (`APP_URL=http://localhost` locally).
 
-## Code of Conduct
+## Database setup
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Scaffold SQLite (`database/database.sqlite`, 3 default migrations). No app-specific models/migrations.
+- MariaDB available locally but not connected for app data (owner decision pending).
 
-## Security Vulnerabilities
+## Frontend setup
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Vite inputs: `resources/css/app.css`, `resources/js/app.ts`.
+- Tailwind 4 CSS-first tokens in `resources/css/theme.css`.
+- Self-hosted fonts via `@fontsource-variable/*`.
+
+## Backend setup
+
+- Laravel 12 skeleton + SPA mount view (`resources/views/app.blade.php`) + catch-all route.
+- No custom controllers/models/APIs/auth/CMS.
+
+## Testing
+
+See `docs/testing/TESTING_GUIDE.md` and `docs/testing/QUALITY_STATUS.md`.
+
+```bash
+npm run type-check
+npm run build
+php artisan test
+composer validate
+```
+
+## Build instructions
+
+```bash
+npm run build   # outputs to public/build/ (manifest + hashed assets)
+```
+
+Ensure `public/hot` is absent for production-style behavior.
+
+## Deployment overview
+
+Deployment is planning-only (no deployment executed). See `docs/DEPLOYMENT.md`, `docs/DEPLOYMENT_PLANNING.md`, `docs/CPANEL_PRODUCTION_DEPLOYMENT_GUIDE.md`, and `docs/PRODUCTION_UPLOAD_CHECKLIST.md`. Release package in `release/` (46.15 MB). Go/No-Go: NO-GO (owner/hosting decisions pending).
+
+## Documentation index
+
+See `docs/README.md` for the central documentation navigation.
+
+## Project status
+
+- Installations 01–22 completed/review-blocked, awaiting Project Owner approval.
+- No deployment executed. No live hosting changes.
+- Content is conservative and pending owner confirmation.
+
+## Repository structure
+
+See `docs/github/GITHUB_PROJECT_INVENTORY.md` for the full inventory.
+
+## Security notes
+
+- No secrets in repository or frontend bundle (verified).
+- `.env` gitignored; production `.env` created on host.
+- Dev-only routes excluded from production bundle.
+- HTTPS, permissions, and hosting security NOT_VERIFIED (no hosting access).
+- See `SECURITY.md` and `docs/security/SECURITY.md`.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+No LICENSE file is present. License selection is an owner decision (not applied without approval).
+
+## About Laravel
+
+This project is built on the Laravel framework. Laravel is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). See `docs/LARAVEL_INSTALLATION.md` for installation details.
+
+## Contributing
+
+See `CONTRIBUTING.md`.
