@@ -38,6 +38,7 @@
 | Owner decision approval & documentation | ✅ Owner decision approval register created (`docs/OWNER_DECISION_APPROVAL_REGISTER.md`); existing D-001–D-015 preserved; no pending decision marked approved; release gate remains NO-GO; type-check/build/tests passed (Module 21C, review; owner approval pending) |
 | Production upload preparation | ✅ Production readiness audit, safe cPanel deployment guide, production upload checklist, and release package prepared in `release/` (46.15 MB); no hosting access, no upload, no source changes (Module 22, review; owner approval pending) |
 | GitHub backup preparation | ✅ Backup created (temp, 22,713 files), `.gitignore` updated (release/vendor/node_modules/local DB/OS files excluded), secret scan clean, GitHub readiness documented; no git init/commit/remote/push performed |
+| Premium professional experience upgrade | ✅ Design audit, premium hero, scroll-reveal, achievement stats (data-driven, hidden when empty), work process, FAQ, contact form (mailto fallback), testimonials (data-driven, hidden when empty), footer contact summary, design docs; no fabricated content, no new packages, no architecture migration (in progress) |
 | Database binding | ⚠️ Skeleton default **SQLite** (`database/database.sqlite`) — MariaDB switch pending |
 | Version control | ⏳ No Git repository initialised yet |
 

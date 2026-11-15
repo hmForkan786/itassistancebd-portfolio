@@ -9,6 +9,7 @@
  */
 import { RouterLink, useRoute } from 'vue-router';
 import { BaseContainer } from '@/components/ui';
+import { site } from '@/data/site';
 import { mainNavigation, type NavItem } from './navigation';
 
 const route = useRoute();
@@ -72,6 +73,13 @@ const currentYear: number = new Date().getFullYear();
 
                 <p class="mt-4 text-small text-footer-muted">
                     Portfolio of IT Assistance BD.
+                </p>
+
+                <p class="mt-3 text-small text-footer-muted">
+                    Get in touch:
+                    <a :href="`mailto:${site.email}`" class="text-footer-text no-underline hover:underline">
+                        {{ site.email }}
+                    </a>
                 </p>
             </div>
 

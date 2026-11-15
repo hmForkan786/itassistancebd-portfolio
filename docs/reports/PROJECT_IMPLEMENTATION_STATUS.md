@@ -7,10 +7,11 @@ Single current-state summary. Detailed evidence is in linked reports.
 ## Current state
 
 - Installations 01–22 are implemented/verified or review-blocked. Modules 11–22 completed/review-blocked, awaiting Project Owner approval.
+- **Premium Experience Upgrade (in progress):** design audit, premium hero, scroll-reveal animations, achievement stats (data-driven, hidden when empty), work process, FAQ, contact form (mailto fallback), testimonials (data-driven, hidden when empty), footer contact summary, new data files (`stats.ts`, `testimonials.ts`), new composables (`useScrollReveal`), new components (`AchievementStats`, `Testimonials`, `WorkProcess`, `Faq`, `ContactForm`). Build: 101 modules; type-check exit 0; tests 2 passed. Lighthouse a11y/bp/seo 1.00 sampled.
 - Application baseline: Laravel 12.72.0 + Vue 3.5.45 + TypeScript 6.0.3 + Vite 6.4.6 + Vue Router 4.6.5 + Pinia 4.1.0 + Axios 1.21.1 + Tailwind 4.3.5.
 - Public pages: `/`, `/about`, `/services`, `/projects`, `/projects/:slug` (5 initiatives + unknown-slug handling), `/contact`.
 - Dev-only routes: `/dev/ui`, `/dev/layout` (excluded from production bundle).
-- Production build: 88 modules; `public/build/manifest.json` present; type-check exit 0; tests 2 passed.
+- Production build: 101 modules; `public/build/manifest.json` present; type-check exit 0; tests 2 passed.
 - Content: static/file-based (`resources/js/data/*`); 4 initiatives Planned, 1 In Progress. Contact email `hmforkan99@gmail.com` (owner confirmation required).
 - SEO: per-route metadata, OG/Twitter, canonical, JSON-LD (Person + WebSite), sitemap (10 URLs), robots.txt.
 - Deployment: planning/audit only; NO-GO (owner decisions pending). Release package in `release/` (46.15 MB).

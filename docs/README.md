@@ -46,7 +46,8 @@
 
 ### Decisions
 - [DECISIONS.md](DECISIONS.md) — verified/owner-approved decision log (D-001–D-015)
-- [decisions/](decisions/) — decision register directory (see `OWNER_DECISION_APPROVAL_REGISTER.md`)
+- [DECISIONS.md](DECISIONS.md) - verified/owner-approved decision log (D-001–D-015)
+- [OWNER_DECISION_APPROVAL_REGISTER.md](OWNER_DECISION_APPROVAL_REGISTER.md) - owner decision approval register (all pending)
 
 ### Backend
 - [backend/BACKEND_DOCUMENTATION.md](backend/BACKEND_DOCUMENTATION.md) — Laravel structure, controllers, models, services, middleware, providers, auth, validation, error handling, conventions
@@ -119,6 +120,12 @@
 - [github/GITHUB_PROJECT_INVENTORY.md](github/GITHUB_PROJECT_INVENTORY.md) — project inventory
 - [github/GITHUB_BACKUP_FINAL_REPORT.md](github/GITHUB_BACKUP_FINAL_REPORT.md) — backup final report (created at push)
 - [GITHUB_BACKUP_GUIDE.md](GITHUB_BACKUP_GUIDE.md) — GitHub backup guide
+
+### Design
+- [design/PORTFOLIO_DESIGN_AUDIT.md](design/PORTFOLIO_DESIGN_AUDIT.md) — design audit (premium upgrade)
+- [design/PORTFOLIO_DESIGN_SYSTEM.md](design/PORTFOLIO_DESIGN_SYSTEM.md) — design system
+- [design/PORTFOLIO_UX_IMPLEMENTATION_REPORT.md](design/PORTFOLIO_UX_IMPLEMENTATION_REPORT.md) — UX implementation report
+- [design/PORTFOLIO_COMPONENT_GUIDE.md](design/PORTFOLIO_COMPONENT_GUIDE.md) — component guide
 
 ### Reference
 - [reference/REFERENCE.md](reference/REFERENCE.md) — central reference links

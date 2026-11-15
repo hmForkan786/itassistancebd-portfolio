@@ -21,6 +21,7 @@ Central roadmap. See `docs/ROADMAP.md` for the full version with proposed/deferr
 - Installation 21C: owner decision approval & documentation.
 - Installation 21D.1: hosting compatibility review.
 - Installation 22: production upload preparation.
+- **Premium Experience Upgrade (in progress):** design audit, premium hero with trust indicators, scroll-reveal animations, achievement stats (data-driven, hidden when empty), work process, FAQ, contact form (mailto fallback), testimonials (data-driven, hidden when empty), footer contact summary, new data files and composables. No fabricated content.
 
 ## Current milestone
 

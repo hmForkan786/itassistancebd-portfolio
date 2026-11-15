@@ -13,13 +13,22 @@
  */
 import { BaseBadge, BaseCard, BaseContainer, SectionHeading } from '@/components/ui';
 import CtaLink from '@/components/portfolio/CtaLink.vue';
+import AchievementStats from '@/components/portfolio/AchievementStats.vue';
+import ContactForm from '@/components/portfolio/ContactForm.vue';
+import Faq from '@/components/portfolio/Faq.vue';
 import ProjectCard from '@/components/portfolio/ProjectCard.vue';
 import ServiceCard from '@/components/portfolio/ServiceCard.vue';
 import SkillItem from '@/components/portfolio/SkillItem.vue';
+import Testimonials from '@/components/portfolio/Testimonials.vue';
+import WorkProcess from '@/components/portfolio/WorkProcess.vue';
+import { useScrollReveal } from '@/composables/useScrollReveal';
 import { aboutPoints, focusAreas, site } from '@/data/site';
 import { projects } from '@/data/projects';
 import { services } from '@/data/services';
 import { skillGroups } from '@/data/skills';
+import { technologiesUsedCount } from '@/data/stats';
+
+useScrollReveal();
 
 /** Pre-encoded mailto target for the contact call to action. */
 const mailtoHref: string = `mailto:${site.email}?subject=${encodeURIComponent('Portfolio enquiry — IT Assistance BD')}`;
@@ -31,7 +40,7 @@ const projectStatuses: readonly string[] = ['Completed', 'In Progress', 'Prototy
 <template>
     <div>
         <!-- Hero: the page's single h1. A subtle surface keeps it distinct without an image. -->
-        <section id="home" class="border-b border-line bg-surface" aria-labelledby="hero-title">
+        <section id="home" class="border-b border-line bg-surface" aria-labelledby="hero-title" data-reveal>
             <BaseContainer class="grid gap-grid py-section lg:grid-cols-12 lg:items-center">
                 <div class="stack-lg lg:col-span-7">
                     <p class="text-small font-semibold tracking-widest uppercase text-primary-dark">
@@ -50,10 +59,26 @@ const projectStatuses: readonly string[] = ['Completed', 'In Progress', 'Prototy
 
                     <div class="flex flex-wrap gap-3">
                         <CtaLink to="/#projects" variant="primary" size="lg">View projects</CtaLink>
-                        <CtaLink to="/#contact" variant="secondary" size="lg">Contact</CtaLink>
+                        <CtaLink to="/#contact" variant="secondary" size="lg">Start a project</CtaLink>
+                        <CtaLink :href="`mailto:${site.email}`" variant="secondary" size="lg">Email me</CtaLink>
                     </div>
 
                     <p class="text-small text-muted">{{ site.availability }}</p>
+
+                    <ul class="mt-2 flex flex-wrap gap-x-6 gap-y-2 text-tiny text-muted" aria-label="Trust indicators">
+                        <li class="flex items-center gap-1.5">
+                            <span class="text-primary-dark" aria-hidden="true">✓</span>
+                            <span>Remote collaboration</span>
+                        </li>
+                        <li class="flex items-center gap-1.5">
+                            <span class="text-primary-dark" aria-hidden="true">✓</span>
+                            <span>Factual, no invented claims</span>
+                        </li>
+                        <li class="flex items-center gap-1.5">
+                            <span class="text-primary-dark" aria-hidden="true">✓</span>
+                            <span>{{ technologiesUsedCount }} verified tools</span>
+                        </li>
+                    </ul>
                 </div>
 
                 <BaseCard as="aside" class="lg:col-span-5" aria-labelledby="focus-heading">
@@ -75,7 +100,7 @@ const projectStatuses: readonly string[] = ['Completed', 'In Progress', 'Prototy
         </section>
 
         <!-- About: concise professional introduction, no invented history. -->
-        <section id="about" class="section" aria-labelledby="about-title">
+        <section id="about" class="section" aria-labelledby="about-title" data-reveal>
             <BaseContainer class="grid gap-grid lg:grid-cols-12 lg:items-start">
                 <div class="lg:col-span-5">
                     <SectionHeading
@@ -102,7 +127,7 @@ const projectStatuses: readonly string[] = ['Completed', 'In Progress', 'Prototy
         </section>
 
         <!-- Services: categories and descriptions only — no prices or guarantees. -->
-        <section id="services" class="section bg-surface" aria-labelledby="services-title">
+        <section id="services" class="section bg-surface" aria-labelledby="services-title" data-reveal>
             <BaseContainer class="stack-lg">
                 <SectionHeading
                     id="services-title"
@@ -126,7 +151,7 @@ const projectStatuses: readonly string[] = ['Completed', 'In Progress', 'Prototy
         </section>
 
         <!-- Projects: initiatives with honest status labels (never assumed complete). -->
-        <section id="projects" class="section" aria-labelledby="projects-title">
+        <section id="projects" class="section" aria-labelledby="projects-title" data-reveal>
             <BaseContainer class="stack-lg">
                 <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                     <SectionHeading
@@ -157,7 +182,7 @@ const projectStatuses: readonly string[] = ['Completed', 'In Progress', 'Prototy
         </section>
 
         <!-- Skills: verified tools grouped by area — no percentage or proficiency bars. -->
-        <section id="skills" class="section bg-surface" aria-labelledby="skills-title">
+        <section id="skills" class="section bg-surface" aria-labelledby="skills-title" data-reveal>
             <BaseContainer class="stack-lg">
                 <SectionHeading
                     id="skills-title"
@@ -186,7 +211,7 @@ const projectStatuses: readonly string[] = ['Completed', 'In Progress', 'Prototy
         </section>
 
         <!-- Contact: verified email only. No phone, no social links, no backend form. -->
-        <section id="contact" class="section" aria-labelledby="contact-title">
+        <section id="contact" class="section" aria-labelledby="contact-title" data-reveal>
             <BaseContainer>
                 <BaseCard class="overflow-hidden bg-surface p-0">
                     <div class="grid gap-grid p-card lg:grid-cols-12 lg:items-center">
@@ -219,5 +244,12 @@ const projectStatuses: readonly string[] = ['Completed', 'In Progress', 'Prototy
                 </BaseCard>
             </BaseContainer>
         </section>
+
+        <!-- Premium additions: data-driven sections that stay hidden when unverified. -->
+        <AchievementStats />
+        <WorkProcess />
+        <Testimonials />
+        <Faq />
+        <ContactForm />
     </div>
 </template>
